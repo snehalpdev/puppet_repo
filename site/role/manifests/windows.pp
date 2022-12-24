@@ -1,3 +1,3 @@
-class role::windows {
-  include profile::soe  
+Class role::windows {
+  include profile::soe
 }

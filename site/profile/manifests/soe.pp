@@ -1,4 +1,4 @@
-class profile::soe (
+Class profile::soe (
   # MOTD
   $motd = true,
   # Activation ## KMS activation
@@ -27,68 +27,47 @@ class profile::soe (
   $wsusclient = false,
   # Crowdstrike Falcon
   $crowdstrike = false,
-  # CIS Hardening
-  $cis_hardening = false,
-  )
-  {
-
-    if $motd == true {
-      include motd
-    }
-
-  #  if $dnsclient == true {
-  #    include dnsclient
-  #  }
-
-  #  if $domainjoin == true {
-  #    include domain_membership
-  #  }
-
-  #  if $windowsfeatures == true {
-  #    include windowsfeatures
-  #  }
-
-  #  if $packageinstall == true {
-  #    include package
-  #  }
-
-  #  if $splunk_forwarder == true {
-  #    include splunk_forwarder
-  #  }
-
-  #  if $timezone == true {
-  #    include timezone
-  #  }
-
-  #  if $users == true {
-  #    include users
-  #  }
-
-  #  if $vmtools == true {
-  #    include vmtools
-  #  }
-
-  #  if $winrm == true {
-  #    include winrm
-  #  }
-
-  #  if $wsusclient == true {
-  #    include wsusclient
-  #  }
-
-  # if $crowdstrike == true {
-  #   include crowdstrike
-  # }
-
-  # if $activate == true {
-  #  include activation
-  # }
-
-  # if $firewall == true {
-  #   include windows_firewall
-  # }
-
-  # if $cis_hardening == true {
-  #   include cis_windows
-  # }
+) {
+  if $motd == true {
+    include motd
   }
+#  if $dnsclient == true {
+#    include dnsclient
+#  }
+#  if $domainjoin == true {
+#    include domain_membership
+#  }
+#  if $windowsfeatures == true {
+#    include windowsfeatures
+#  }
+#  if $packageinstall == true {
+#    include package
+#  }
+#  if $splunk_forwarder == true {
+#    include splunk_forwarder
+#  }
+#  if $timezone == true {
+#    include timezone
+#  }
+#  if $users == true {
+#    include users
+#  }
+#  if $vmtools == true {
+#    include vmtools
+#  }
+#  if $winrm == true {
+#    include winrm
+#  }
+#  if $wsusclient == true {
+#    include wsusclient
+#  }
+# if $crowdstrike == true {
+#   include crowdstrike
+# }
+# if $activate == true {
+#  include activation
+# }
+# if $firewall == true {
+#   include windows_firewall
+# }
+}
