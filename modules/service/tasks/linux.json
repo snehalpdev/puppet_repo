@@ -1,0 +1,16 @@
+{
+  "description": "Manage and inspect the state of services (without a puppet agent)",
+  "private": true,
+  "input_method": "environment",
+  "parameters": {
+    "action": {
+      "description": "The operation (start, stop, restart, status, enable, disable) to perform on the service.",
+      "type": "Enum[start, stop, restart, status, enable, disable]"
+    },
+    "name": {
+      "description": "The name of the service to operate on.",
+      "type": "String[1]"
+    }
+  },
+  "files": ["service/files/common.sh"], "input_method": "environment"
+}
