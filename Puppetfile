@@ -8,10 +8,3 @@ mod 'puppetlabs-package', '2.3.0'
 mod 'trlinkin-domain_membership', '1.1.2'
 mod 'puppet-windows_firewall', '4.1.0'
 mod 'puppetfinland-windows_snmp', '0.3.1'
-
-
-
-
-
-
-
