@@ -1,0 +1,9 @@
+*.swp
+.DS_Store
+Gemfile.local
+Gemfile.lock
+Puppetfile.lock
+.bundle/
+.r10k-deploy.json
+.ruby-version
+.vagrant
