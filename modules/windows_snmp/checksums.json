@@ -1,0 +1,12 @@
+{
+  "CHANGELOG.md": "9f659b56c3855cf83c8756aa6b2ca808",
+  "Gemfile": "e1b5a60ddd95b3c27474b8720f492ea7",
+  "LICENSE": "051c35656663138736852932ace5cf33",
+  "README.md": "7ab009760c91dc909903f51411202b39",
+  "Rakefile": "df4172642435e770c27019d9d15d59bd",
+  "appveyor.yml": "105dce352be3244a497e667f6b0403c7",
+  "manifests/init.pp": "b47208721971f169ad45a89a47cdc711",
+  "metadata.json": "c3feb389dc9837a287fedc5d5874f4b5",
+  "spec/default_facts.yml": "4de3cb611af6981a6d22bc77d7dd6f6f",
+  "spec/spec_helper.rb": "6a8493cc89df06740a1f7ed364aed66c"
+}
