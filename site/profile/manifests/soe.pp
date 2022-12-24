@@ -33,62 +33,62 @@ class profile::soe (
   {
 
     if $motd == true {
-      include motd
+      include windows::motd
     }
 
   #  if $dnsclient == true {
-  #    dnsclient
+  #    include windows::dnsclient
   #  }
 
   #  if $domainjoin == true {
-  #    include domain_membership
+  #    include windows::domain_membership
   #  }
 
   #  if $windowsfeatures == true {
-  #    include windowsfeatures
+  #    include windows::windowsfeatures
   #  }
 
   #  if $packageinstall == true {
-  #    include package
+  #    include windows::package
   #  }
 
   #  if $splunk_forwarder == true {
-  #    include splunk_forwarder
+  #    include windows::splunk_forwarder
   #  }
 
   #  if $timezone == true {
-  #    include timezone
+  #    include windows::timezone
   #  }
 
   #  if $users == true {
-  #    include users
+  #    include windows::users
   #  }
 
   #  if $vmtools == true {
-  #    include vmtools
+  #    include windows::vmtools
   #  }
 
   #  if $winrm == true {
-  #    include winrm
+  #    include windows::winrm
   #  }
 
   #  if $wsusclient == true {
-  #    include wsusclient
+  #    include windows::wsusclient
   #  }
 
   # if $crowdstrike == true {
-  #   include crowdstrike
+  #   include windows::crowdstrike
   # }
 
   # if $activate == true {
-  #  include activation
+  #  include windows::activation
   # }
 
   # if $firewall == true {
-  #   include windows_firewall
+  #   include windows::windows_firewall
   # }
 
   # if $cis_hardening == true {
-  #   include cis_windows
+  #   include windows::cis_windows
   # }
   }
