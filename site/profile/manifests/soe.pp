@@ -1,5 +1,4 @@
-class profile::soe {
-  class {'::soe' (
+class profile::soe (
   # MOTD
   $motd = true,
   # Activation ## KMS activation
@@ -93,4 +92,3 @@ class profile::soe {
   #   include cis_windows
   # }
   }
-}
