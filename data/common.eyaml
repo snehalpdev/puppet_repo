@@ -1,2 +1,2 @@
-windows::motd::windows_motd_title: |
+motd::windows_motd_title: |
    **** Puppet managed Windows System ****
