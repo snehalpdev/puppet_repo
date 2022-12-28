@@ -7,12 +7,4 @@ defaults:
 hierarchy:
 - name: "ENC Groupings"
   paths:
-    - "host/%{organization}/%{fqdn}.eyaml"
-    - "organization/%{organization}/%{location}.eyaml"
-    - "organization/%{organization}.eyaml"
-    - "location/%{location}.eyaml"
-    - "hostgroup/%{hostgroup}.eyaml"
-    - "os/%{facts.osfamily}/%{facts.operatingsystemmajrelease}.eyaml"
-    - "os/%{facts.osfamily}.eyaml"
-    - "common.eyaml"
-  lookup_key: eyaml_lookup_key
+    - "common.yaml"
