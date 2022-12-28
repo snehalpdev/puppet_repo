@@ -1,4 +1,4 @@
-# Puppet class profile
+# Puppet profile
 class profile::soe {
   include motd
 }
