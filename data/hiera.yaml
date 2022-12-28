@@ -7,4 +7,5 @@ defaults:
 hierarchy:
 - name: "ENC Groupings"
   paths:
+    - "host/%{::trusted.certname}.yaml"
     - "common.yaml"
