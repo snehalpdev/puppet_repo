@@ -1,0 +1,36 @@
+---
+local:
+  provisioner: docker
+  images:
+    - "litmusimage/centos:8"
+
+linux:
+  provisioner: docker
+  images:
+    - "ghcr.io/ffalor/centos:7"
+    - "ghcr.io/ffalor/centos:stream8"
+    - "ghcr.io/ffalor/centos:stream9"
+    - "ghcr.io/ffalor/debian:10"
+    - "ghcr.io/ffalor/debian:11"
+    - "ghcr.io/ffalor/ubuntu:18.04"
+    - "ghcr.io/ffalor/ubuntu:20.04"
+    - "ghcr.io/ffalor/ubuntu:22.04"
+    - "ghcr.io/ffalor/oraclelinux:6"
+    - "ghcr.io/ffalor/oraclelinux:7"
+    - "ghcr.io/ffalor/oraclelinux:8"
+    - "ghcr.io/ffalor/scientificlinux:7"
+    - "ghcr.io/ffalor/rockylinux:8"
+    - "ghcr.io/ffalor/rockylinux:9"
+    - "ghcr.io/ffalor/almalinux:8"
+    - "ghcr.io/ffalor/almalinux:9"
+    - "ghcr.io/ffalor/amazonlinux:2"
+
+windows:
+  provisioner: vagrant
+  images:
+    - "StefanScherer/windows_10"
+
+# Puppet versions to test agaisnt
+collections:
+  - puppet6-nightly
+  - puppet7-nightly
