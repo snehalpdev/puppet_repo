@@ -1,15 +1,3 @@
 # Windows MOTD
 motd::windows_motd_title: |
    **** Puppet managed Windows System ****
-
-# Windows Falcon install
-falcon::install:install_method: 'local'
-falcon::install:package_name: 'WindowsSensor.exe'
-falcon::install:package_options:info: 'C:\build'
-# Windows Falcon config
-falcon::config:cid: '1234'
-falcon::config:provisioning_token: ''
-falcon::config:proxy_host: ''
-falcon::config:proxy_port: ''
-# Windows Falcon service
-falcon::service:service_ensure: 'running'
