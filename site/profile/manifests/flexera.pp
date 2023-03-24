@@ -7,7 +7,6 @@ class profile::flexera {
   if ($install_flexera == 'true') {
     package { 'wget':
       ensure => present,
-      before => Archive['$build_dir'],
     }
 
     archive { $build_dir:
