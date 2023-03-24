@@ -1,6 +1,6 @@
 # Puppet Flexera Class
 class profile::flexera {
-  $build_dir = 'C:\temp\n'
+  $build_dir = 'C:\temp\'
   $download_url = hiera('profile::flexera::download_url','http://server02.local/repo/fnms/fnms_agent.zip')
   $install_flexera = hiera('profile::flexera::install_flexera','false')
 
