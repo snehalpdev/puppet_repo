@@ -29,7 +29,7 @@ class profile::flexera {
       install_options => [
         '/qn',
         'TRANSFORMS=C:\\temp\\fnms\\InstallFlexNetInvAgent.mst',
-        'BOOTSTRAPSCHEDULE=C:\\temp\\fnms\\Bootstrap Machine Schedule.nds',
+        'BOOTSTRAPSCHEDULE="C:\\temp\\fnms\\Bootstrap Machine Schedule.nds"',
         'GENERATEINVENTORY=true',
         'APPLYPOLICY=true',
       ],
