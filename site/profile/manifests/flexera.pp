@@ -13,7 +13,7 @@ class profile::flexera {
       extract       => 'true',
       extract_path  => 'C:\\temp\\fnms',
       cleanup       => 'true',
-      before        => Package['FlexNet Inventory Agent'],
+#  before        => Package['FlexNet Inventory Agent'],
     }
 
     #package { 'FlexNet Inventory Agent':
