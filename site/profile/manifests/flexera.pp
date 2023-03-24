@@ -9,7 +9,7 @@ class profile::flexera {
       ensure        => present,
       source        => $download_url,
       checksum_type => 'sha256',
-      checksum      => 'ab1c23d4e5f67a89b0c1d2e3f4a56789b0c1d2e3f4a56789b0c1d2e3f4a56789',
+      checksum      => '9929bc494433c7843418e4286951df9c055832e6002a8a965402feff85699bac',
       before        => Package['FlexNet Inventory Agent'],
     }
 
