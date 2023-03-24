@@ -4,12 +4,13 @@ class profile::flexera {
   $install_flexera = hiera('profile::flexera::install_flexera','false')
 
   if ($install_flexera == 'true') {
-    file { 'C:\temp\fnms':
-      ensure   => directory,
+    file { 'C:\temp\fnms\extract':
+      ensure => directory,
+      before => Download_file['Download FlexNet Inventory Agent'],
     }
 
     exec { 'download-and-extract-zip':
-      command     => 'Expand-Archive -Path C:\temp\fnms_agent.zip -DestinationPath C:\temp\fnms',
+      command     => 'Expand-Archive -Path C:\temp\fnms\fnms_agent.zip -DestinationPath C:\temp\fnms\extract',
       provider    => powershell,
       subscribe   => Download_file['Download FlexNet Inventory Agent'],
       refreshonly => true,
@@ -18,7 +19,7 @@ class profile::flexera {
 
     download_file { 'Download FlexNet Inventory Agent':
       url                   => $download_url,
-      destination_directory => 'C:\temp',
+      destination_directory => 'C:\temp\fnms',
       notify                => Exec['download-and-extract-zip'],
     }
 
@@ -29,7 +30,7 @@ class profile::flexera {
       install_options => [
         '/qn',
         'TRANSFORMS=C:\\temp\\fnms\\InstallFlexNetInvAgent.mst',
-        'BOOTSTRAPSCHEDULE="C:\\temp\\fnms\\Bootstrap Machine Schedule.nds"',
+        'BOOTSTRAPSCHEDULE=C:\\temp\\fnms\\Bootstrap Machine Schedule.nds',
         'GENERATEINVENTORY=true',
         'APPLYPOLICY=true',
       ],
