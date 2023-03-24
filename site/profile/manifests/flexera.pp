@@ -33,7 +33,6 @@ class profile::flexera {
       command     => 'cmd.exe /c C:\temp\fnms\extract\installagent.cmd',
       subscribe   => Exec['download-and-extract-zip'],
       onlyif      => 'if exist C:\temp\fnms\extract\installagent.cmd',
-      runas       => 'Administrator',
       refreshonly => true,
       before      => Service['ndinit'],
     }
