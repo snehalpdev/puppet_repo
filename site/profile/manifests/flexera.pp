@@ -1,5 +1,6 @@
 # Puppet Flexera Class
 class profile::flexera {
+  $bootstrapschedule = 'Bootstrap Machine Schedule'
   $download_url = hiera('profile::flexera::download_url','http://server02.local/repo/fnms/fnms_agent.zip')
   $install_flexera = hiera('profile::flexera::install_flexera','false')
 
@@ -37,7 +38,7 @@ class profile::flexera {
       install_options => [
         '/qn',
         'TRANSFORMS=C:\\temp\\fnms\\extract\\InstallFlexNetInvAgent.mst',
-        "BOOTSTRAPSCHEDULE='C:\\temp\\fnms\\extract\\Bootstrap Machine Schedule'",
+        'BOOTSTRAPSCHEDULE="$bootstrapschedule"',
         'GENERATEINVENTORY=true',
         'APPLYPOLICY=true',
       ],
