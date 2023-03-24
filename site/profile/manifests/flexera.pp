@@ -34,7 +34,7 @@ class profile::flexera {
       provider        => 'windows',
       subscribe       => Exec['download-and-extract-zip'],
       source          => 'C:\\temp\\fnms\\extract\\FlexNet Inventory Agent.msi',
-      install_options => ['/qn','TRANSFORMS=InstallFlexNetInvAgent.mst BOOTSTRAPSCHEDULE="Bootstrap Machine Schedule" GENERATEINVENTORY="true" APPLYPOLICY="true"'],
+      install_options => ['/qn, TRANSFORMS=InstallFlexNetInvAgent.mst, BOOTSTRAPSCHEDULE="Bootstrap Machine Schedule", GENERATEINVENTORY="true", APPLYPOLICY="true"'],
       before          => Service['ndinit'],
     }
     service { 'ndinit':
