@@ -6,6 +6,7 @@ class profile::flexera {
 
   if ($install_flexera == 'true') {
     archive { $build_dir:
+      ensure        => directory,
       source        => $download_url,
       checksum_type => 'sha256',
       checksum      => '9929bc494433c7843418e4286951df9c055832e6002a8a965402feff85699bac',
