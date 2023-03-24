@@ -12,16 +12,15 @@ class profile::flexera {
     exec { 'download-and-extract-zip':
       command     => 'Expand-Archive -Path C:\temp\fnms_agent.zip -DestinationPath C:\temp\fnms',
       provider    => powershell,
-      subscribe   => File['C:\temp\fnms_agent.zip'],
+      subscribe   => Download_file['Download FlexNet Inventory Agent'],
       refreshonly => true,
+      before      => Package['FlexNet Inventory Agent'],
     }
 
-    file { 'C:\temp\fnms_agent.zip':
-      ensure   => file,
-      source   => $download_url,
-      provider => powershell,
-      content  => powershell::download('$download_url'),
-      notify   => Exec['download-and-extract-zip'],
+    download_file { 'Download FlexNet Inventory Agent':
+      url                   => $download_url,
+      destination_directory => 'C:\temp',
+      notify                => Exec['download-and-extract-zip'],
     }
 
     package { 'FlexNet Inventory Agent':
