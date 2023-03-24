@@ -1,29 +1,37 @@
 # Puppet Flexera Class
 class profile::flexera {
-  $zip_file = 'C:\temp\fnms_agent.zip'
   $download_url = hiera('profile::flexera::download_url','http://server02.local/repo/fnms/fnms_agent.zip')
   $install_flexera = hiera('profile::flexera::install_flexera','false')
 
   if ($install_flexera == 'true') {
-    archive { $zip_file:
-      ensure        => present,
-      source        => $download_url,
-      checksum_type => 'sha256',
-      checksum      => '9929bc494433c7843418e4286951df9c055832e6002a8a965402feff85699bac',
-      extract       => 'true',
-      extract_path  => 'C:\\temp\\build',
-      creates       => 'C:\\temp\\build\\installed.txt',
-      cleanup       => 'true',
-      before        => Package['FlexNet Inventory Agent'],
+    file { 'C:\temp\fnms':
+      ensure   => directory,
+      provider => powershell,
+    }
+
+    exec { 'download-and-extract-zip':
+      command     => 'Expand-Archive -Path C:\temp\fnms_agent.zip -DestinationPath C:\temp\fnms',
+      provider    => powershell,
+      subscribe   => File['C:\temp\fnms_agent.zip'],
+      refreshonly => true,
+    }
+
+    file { 'C:\temp\fnms_agent.zip':
+      ensure   => file,
+      source   => $download_url,
+      provider => powershell,
+      content  => powershell::download($download_url),
+      notify   => Exec['download-and-extract-zip'],
     }
 
     package { 'FlexNet Inventory Agent':
       ensure          => 'installed',
       provider        => 'windows',
-      source          => 'C:\\temp\\build\\FlexNet Inventory Agent.msi',
+      source          => 'C:\\temp\\fnms\\FlexNet Inventory Agent.msi',
       install_options => [
         '/qn',
-        'TRANSFORMS=C:\\temp\\build\\InstallFlexNetInvAgent.mst',
+        'TRANSFORMS=C:\\temp\\fnms\\InstallFlexNetInvAgent.mst',
+        'BOOTSTRAPSCHEDULE=C:\\temp\\fnms\\Bootstrap Machine Schedule.nds',
         'GENERATEINVENTORY=true',
         'APPLYPOLICY=true',
       ],
