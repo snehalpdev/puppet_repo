@@ -20,7 +20,7 @@ class profile::flexera {
       ensure   => file,
       source   => $download_url,
       provider => powershell,
-      content  => powershell::download($download_url),
+      content  => powershell::download('$download_url'),
       notify   => Exec['download-and-extract-zip'],
     }
 
