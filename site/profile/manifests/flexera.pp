@@ -1,10 +1,10 @@
-Class profile::flexera (
-  $build_dir = 'C:\temp\Flexera',
-  $download_url = hiera('profile::flexera::download_url','http://server02.local/repo/fnms/fnms_agent.zip'),
-  $install_flexera = hiera('profile::flexera::install_flexera','false'),
-) {
+# Puppet Flexera Class
+class profile::flexera {
+  $build_dir = 'C:\temp\Flexera'
+  $download_url = hiera('profile::flexera::download_url','http://server02.local/repo/fnms/fnms_agent.zip')
+  $install_flexera = hiera('profile::flexera::install_flexera','false')
+
   if ($install_flexera == 'true') {
-    # Download and extract the package
     archive { $build_dir:
       ensure        => present,
       source        => $download_url,
@@ -26,7 +26,6 @@ Class profile::flexera (
       ],
       before          => service['ndinit'],
     }
-
     service { 'ndinit':
       ensure => running,
       enable => true,
