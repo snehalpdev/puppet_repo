@@ -21,7 +21,7 @@ class profile::flexera {
       ensure          => 'installed',
       provider        => 'windows',
       source          => 'C:\\temp\\build\\FlexNet Inventory Agent.msi',
-     install_options => [
+      install_options => [
         '/qn',
         'BOOTSTRAPSCHEDULE="Bootstrap Machine Schedule"',
         'GENERATEINVENTORY="true"',
@@ -30,9 +30,9 @@ class profile::flexera {
       ],
       before          => Service['ndinit'],
     }
-    #service { 'ndinit':
-    #  ensure => running,
-    #  enable => true,
-    #}
+    service { 'ndinit':
+      ensure => running,
+      enable => true,
+    }
   }
 }
