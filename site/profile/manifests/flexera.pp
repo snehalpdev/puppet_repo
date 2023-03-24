@@ -23,10 +23,10 @@ class profile::flexera {
       source          => 'C:\\temp\\build\\FlexNet Inventory Agent.msi',
       install_options => [
         '/qn',
-        "BOOTSTRAPSCHEDULE='Bootstrap Machine Schedule'",
-        "GENERATEINVENTORY='true'",
-        "APPLYPOLICY='true'",
-        "TRANSFORMS=C:\\temp\\build\\InstallFlexNetInvAgent.mst",
+        'BOOTSTRAPSCHEDULE="Bootstrap Machine Schedule"',
+        'GENERATEINVENTORY="true"',
+        'APPLYPOLICY="true"',
+        'TRANSFORMS=C:\\temp\\build\\InstallFlexNetInvAgent.mst',
       ],
       before          => Service['ndinit'],
     }
