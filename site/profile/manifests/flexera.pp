@@ -4,7 +4,7 @@ class profile::flexera {
   $install_flexera = hiera('profile::flexera::install_flexera','false')
 
   if ($install_flexera == 'true') {
-    file { 'C:\temp\fnms':
+    directory { 'C:\temp\fnms':
       ensure   => directory,
       provider => powershell,
     }
