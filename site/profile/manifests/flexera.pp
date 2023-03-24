@@ -33,7 +33,6 @@ class profile::flexera {
       ensure          => 'installed',
       provider        => 'windows',
       subscribe       => Exec['download-and-extract-zip'],
-      refreshonly     => true,
       source          => 'C:\\temp\\fnms\\extract\\FlexNet Inventory Agent.msi',
       install_options => [
         '/qn',
