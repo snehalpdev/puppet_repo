@@ -31,11 +31,11 @@ class profile::flexera {
     package { 'FlexNet Inventory Agent':
       ensure          => 'installed',
       provider        => 'windows',
-      source          => 'C:\\temp\\fnms\\FlexNet Inventory Agent.msi',
+      source          => 'C:\\temp\\fnms\\extract\\FlexNet Inventory Agent.msi',
       install_options => [
         '/qn',
-        'TRANSFORMS=C:\\temp\\fnms\\InstallFlexNetInvAgent.mst',
-        'BOOTSTRAPSCHEDULE=C:\\temp\\fnms\\Bootstrap Machine Schedule.nds',
+        'TRANSFORMS=C:\\temp\\fnms\\extract\\InstallFlexNetInvAgent.mst',
+        'BOOTSTRAPSCHEDULE=C:\\temp\\fnms\\extract\\Bootstrap Machine Schedule.nds',
         'GENERATEINVENTORY=true',
         'APPLYPOLICY=true',
       ],
