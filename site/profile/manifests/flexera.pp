@@ -19,8 +19,8 @@ class profile::flexera {
       provider    => powershell,
       subscribe   => Download_file['Download FlexNet Inventory Agent'],
       refreshonly => true,
-      before      => Exec['FlexNet Inventory Agent'],
-      notify      => Exec['FlexNet Inventory Agent'],
+      before      => Package['FlexNet Inventory Agent'],
+      notify      => Package['FlexNet Inventory Agent'],
     }
 
     download_file { 'Download FlexNet Inventory Agent':
@@ -29,30 +29,24 @@ class profile::flexera {
       notify                => Exec['download-and-extract-zip'],
     }
 
-    exec { 'FlexNet Inventory Agent':
-      command     => 'C:\Windows\System32\cmd.exe /c C:\temp\fnms\extract\installagent.cmd',
-      subscribe   => Exec['download-and-extract-zip'],
-      onlyif      => 'C:\Windows\System32\cmd.exe /c if exist C:\temp\fnms\extract\installagent.cmd',
-      refreshonly => true,
-#      before      => Service['ndinit'],
+    package { 'FlexNet Inventory Agent':
+      ensure          => 'installed',
+      provider        => 'windows',
+      subscribe       => Exec['download-and-extract-zip'],
+      refreshonly     => true,
+      source          => 'C:\\temp\\fnms\\extract\\FlexNet Inventory Agent.msi',
+      install_options => [
+        '/qn',
+        'TRANSFORMS=C:\\temp\\fnms\\extract\\InstallFlexNetInvAgent.mst',
+        'BOOTSTRAPSCHEDULE=C:\\temp\\fnms\\extract\\Bootstrap Machine Schedule',
+        'GENERATEINVENTORY=true',
+        'APPLYPOLICY=true',
+      ],
+      before          => Service['ndinit'],
     }
-
-#   package { 'FlexNet Inventory Agent':
-#     ensure          => 'installed',
-#     provider        => 'windows',
-#     source          => 'C:\\temp\\fnms\\extract\\FlexNet Inventory Agent.msi',
-#     install_options => [
-#       '/qn',
-#       'TRANSFORMS=C:\\temp\\fnms\\extract\\InstallFlexNetInvAgent.mst',
-#       'BOOTSTRAPSCHEDULE=C:\\temp\\fnms\\extract\\Bootstrap Machine Schedule.nds',
-#       'GENERATEINVENTORY=true',
-#       'APPLYPOLICY=true',
-#     ],
-#     before          => Service['ndinit'],
-#   }
-#    service { 'ndinit':
-#      ensure => running,
-#      enable => true,
-#    }
+    service { 'ndinit':
+      ensure => running,
+      enable => true,
+    }
   }
 }
