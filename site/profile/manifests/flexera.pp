@@ -6,7 +6,6 @@ class profile::flexera {
   if ($install_flexera == 'true') {
     file { 'C:\temp\fnms':
       ensure   => directory,
-      provider => powershell,
     }
 
     exec { 'download-and-extract-zip':
