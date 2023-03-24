@@ -34,7 +34,7 @@ class profile::flexera {
       subscribe   => Exec['download-and-extract-zip'],
       onlyif      => 'C:\Windows\System32\cmd.exe /c if exist C:\temp\fnms\extract\installagent.cmd',
       refreshonly => true,
-      before      => Service['ndinit'],
+#      before      => Service['ndinit'],
     }
 
 #   package { 'FlexNet Inventory Agent':
@@ -50,9 +50,9 @@ class profile::flexera {
 #     ],
 #     before          => Service['ndinit'],
 #   }
-    service { 'ndinit':
-      ensure => running,
-      enable => true,
-    }
+#    service { 'ndinit':
+#      ensure => running,
+#      enable => true,
+#    }
   }
 }
