@@ -5,6 +5,11 @@ class profile::flexera {
   $install_flexera = hiera('profile::flexera::install_flexera','false')
 
   if ($install_flexera == 'true') {
+    package { 'wget':
+      ensure => present,
+      before => Archive['$build_dir'],
+    }
+
     archive { $build_dir:
       ensure        => present,
       source        => $download_url,
