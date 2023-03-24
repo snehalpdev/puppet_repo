@@ -12,6 +12,7 @@ class profile::flexera {
       checksum      => '9929bc494433c7843418e4286951df9c055832e6002a8a965402feff85699bac',
       extract       => 'true',
       creates       => "${build_dir}\\fnms",
+      extract_path  => "${build_dir}\\fnms",
       cleanup       => 'true',
       before        => Package['FlexNet Inventory Agent'],
     }
