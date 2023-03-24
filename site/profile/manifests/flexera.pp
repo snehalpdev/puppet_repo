@@ -1,6 +1,6 @@
 # Puppet Flexera Class
 class profile::flexera {
-  $zip_file = 'C:\temp\fnms\fnms_agent.zip'
+  $zip_file = 'C:\temp\fnms_agent.zip'
   $download_url = hiera('profile::flexera::download_url','http://server02.local/repo/fnms/fnms_agent.zip')
   $install_flexera = hiera('profile::flexera::install_flexera','false')
 
@@ -23,10 +23,10 @@ class profile::flexera {
       source          => 'C:\temp\fnms\FlexNet Inventory Agent.msi',
       install_options => [
         '/qn',
-        'BOOTSTRAPSCHEDULE=Bootstrap Machine Schedule',
-        'GENERATEINVENTORY=true',
-        'APPLYPOLICY=true',
-        'TRANSFORMS=C:\temp\fnms\InstallFlexNetInvAgent.mst',
+        'BOOTSTRAPSCHEDULE="Bootstrap Machine Schedule"',
+        'GENERATEINVENTORY="true"',
+        'APPLYPOLICY="true"',
+        'TRANSFORMS="C:\temp\fnms\InstallFlexNetInvAgent.mst"',
       ],
       before          => Service['ndinit'],
     }
