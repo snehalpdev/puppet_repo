@@ -4,9 +4,14 @@ class profile::flexera {
   $install_flexera = hiera('profile::flexera::install_flexera','false')
 
   if ($install_flexera == 'true') {
-    file { 'C:\temp\fnms\extract':
+    file { 'C:\temp\fnms':
       ensure => directory,
       before => Download_file['Download FlexNet Inventory Agent'],
+    }
+
+    file { 'C:\temp\fnms\extract':
+      ensure => directory,
+      before => Exec['download-and-extract-zip'],
     }
 
     exec { 'download-and-extract-zip':
