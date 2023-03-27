@@ -43,8 +43,8 @@ class profile::flexera (
         '/qn',
         'TRANSFORMS=InstallFlexNetInvAgent.mst',
         'BOOTSTRAPSCHEDULE="Bootstrap Machine Schedule"',
-        'GENERATEINVENTORY=true',
-        'APPLYPOLICY=true',
+        'GENERATEINVENTORY="true"',
+        'APPLYPOLICY="true"',
       ],
       before          => Service['ndinit'],
     }
