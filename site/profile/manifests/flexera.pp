@@ -1,6 +1,5 @@
 # @param build_dir
 # @param extract_dir
-# @param logfile
 # @param download_url
 # @param install_flexera
 
@@ -8,7 +7,6 @@
 class profile::flexera (
   String $build_dir = 'C:\temp\fnms',
   String $extract_dir = 'C:\temp\fnms\extract',
-  String $logfile = 'C:\temp\flexera_install.log',
   String $download_url = hiera('profile::flexera::download_url','http://server02.local/repo/fnms/fnms_agent.zip'),
   $install_flexera = hiera('profile::flexera::install_flexera','false')
 ) {
@@ -40,7 +38,6 @@ class profile::flexera (
     exec { 'FlexNet Inventory Agent':
       command   => "${extract_dir}\\FlexNet Inventory Agent.msi /qn TRANSFORMS=InstallFlexNetInvAgent.mst BOOTSTRAPSCHEDULE='Bootstrap Machine Schedule' GENERATEINVENTORY='true' APPLYPOLICY='true'",
       logoutput => 'on_failure',
-      log       => $logfile,
       before    => Service['ndinit'],
     }
 
