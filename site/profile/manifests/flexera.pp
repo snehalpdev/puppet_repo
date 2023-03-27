@@ -36,7 +36,7 @@ class profile::flexera (
     }
 
     exec { 'FlexNet Inventory Agent':
-      command   => "'${extract_dir}\\FlexNet Inventory Agent.msi' /qn TRANSFORMS=InstallFlexNetInvAgent.mst BOOTSTRAPSCHEDULE='Bootstrap Machine Schedule' GENERATEINVENTORY='true' APPLYPOLICY='true'",
+      command   => "${extract_dir}\\'FlexNet Inventory Agent.msi' /qn TRANSFORMS=InstallFlexNetInvAgent.mst BOOTSTRAPSCHEDULE='Bootstrap Machine Schedule' GENERATEINVENTORY='true' APPLYPOLICY='true'",
       logoutput => 'on_failure',
       before    => Service['ndinit'],
     }
