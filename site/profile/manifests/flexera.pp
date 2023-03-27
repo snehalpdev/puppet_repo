@@ -26,7 +26,7 @@ class profile::flexera (
       provider    => powershell,
       subscribe   => Download_file['Download FlexNet Inventory Agent'],
       refreshonly => true,
-      before      => Exec['FlexNet Inventory Agent'],
+      before      => Package['FlexNet Inventory Agent'],
     }
 
     download_file { 'Download FlexNet Inventory Agent':
