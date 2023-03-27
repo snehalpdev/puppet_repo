@@ -1,23 +1,28 @@
-Class profile::crowdstrike (
-  $customer_id  = hiera('profile::crowdstrike::customer_id',undef),
-  $provtoken = hiera('profile::crowdstrike::provtoken',undef),
-  $falcon_proxy_host = hiera('profile::crowdstrike::falcon_proxy_host',undef),
-  $falcon_proxy_port = hiera('profile::crowdstrike::falcon_proxy_port',undef),
-  $build_dir = 'C:\temp\CrowdStrike',
-  $download_url = hiera('profile::crowdstrike::download_url','http://server02.local/repo/CrowdStrike/crowdstrike.zip'),
-  $install_crowdstrike = hiera('profile::crowdstrike::install_crowdstrike','false')
+# @param customer_id
+# @param provtoken
+# @param falcon_proxy_host
+# @param falcon_proxy_port
+# @param build_dir
+# @param download_url
+# @param install_crowdstrike
+
+# Puppet Profile Class Crowdstrike
+class profile::crowdstrike (
+  String $customer_id  = hiera('profile::crowdstrike::customer_id',undef),
+  String $provtoken = hiera('profile::crowdstrike::provtoken',undef),
+  Optional[String]  $falcon_proxy_host = hiera('profile::crowdstrike::falcon_proxy_host',undef),
+  Optional[String] $falcon_proxy_port = hiera('profile::crowdstrike::falcon_proxy_port',undef),
+  String $build_dir = 'C:\temp',
+  String $download_url = hiera('profile::crowdstrike::download_url','http://server02.local/repo/CrowdStrike/WindowsSensor.exe'),
+  Boolean $install_crowdstrike = hiera('profile::crowdstrike::install_crowdstrike','false')
 ) {
   if ($install_crowdstrike == 'true') {
-    # Download and extract the package
-    archive { $build_dir:
-      ensure        => present,
-      source        => $download_url,
-      checksum_type => 'sha256',
-      checksum      => 'ab1c23d4e5f67a89b0c1d2e3f4a56789b0c1d2e3f4a56789b0c1d2e3f4a56789',
-      before        => package['CrowdStrike Windows Sensor'],
+    download_file { 'Download CrowdStrike':
+      url                   => $download_url,
+      destination_directory => $build_dir,
+      before                => Packaeg['CrowdStrike Windows Sensor'],
     }
 
-    # Install and configure Crowdstrike
     package { 'CrowdStrike Windows Sensor':
       ensure          => installed,
       source          => "${build_dir}\\WindowsSensor.exe",

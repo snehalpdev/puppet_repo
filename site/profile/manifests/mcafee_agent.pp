@@ -1,22 +1,23 @@
-Class profile::mcafee_agent (
-  $build_dir = 'C:\temp\Mcafee',
-  $logfile = 'C:\temp\Mcafee\Install.log',
-  $download_url = hiera('profile::mcafee_agent::download_url','http://server02.local/repo/mcafee/mcafee.zip'),
-  $install_mcafee = hiera('profile::mcafee_agent::install_mcafee','false')
+# @param build_dir
+# @param logfile
+# @param download_url
+# @param install_mcafee
+
+#Puppet Profile class mcafee_agent
+class profile::mcafee_agent (
+  String $build_dir = 'C:\temp',
+  String $logfile = 'C:\temp\Install.log',
+  String $download_url = hiera('profile::mcafee_agent::download_url','http://server02.local/repo/mcafee/FramePkg.exe'),
+  Boolean $install_mcafee = hiera('profile::mcafee_agent::install_mcafee','false')
 ) {
   if ($install_mcafee == 'true') {
-    # Download and extract the package
-    archive { $build_dir:
-      ensure        => present,
-      source        => $download_url,
-      checksum_type => 'sha256',
-      checksum      => 'ab1c23d4e5f67a89b0c1d2e3f4a56789b0c1d2e3f4a56789b0c1d2e3f4a56789',
-      before        => exec['McAfee Endpoint Agent'],
+    download_file { 'Download Mcafee Agent':
+      url                   => $download_url,
+      destination_directory => $build_dir,
+      notify                => Exec['McAfee Endpoint Agent'],
     }
-
-    # Install and configure McAfee Endpoint Agent
     exec { 'McAfee Endpoint Agent':
-      command   => "${build_dir}\\Endpoint_Agent_Standalone\\FramePkg.exe /INSTALL=UPDATER /SILENT",
+      command   => "${build_dir}\\FramePkg.exe /INSTALL=Agent /SILENT",
       logoutput => 'on_failure',
       log       => $logfile,
       before    => service['masvc'],

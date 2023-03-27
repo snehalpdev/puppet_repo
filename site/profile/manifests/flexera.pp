@@ -1,21 +1,28 @@
-# Puppet Flexera Class
-class profile::flexera {
-  $download_url = hiera('profile::flexera::download_url','http://server02.local/repo/fnms/fnms_agent.zip')
-  $install_flexera = hiera('profile::flexera::install_flexera','false')
+# @param build_dir
+# @param extract_dir
+# @param download_url
+# @param install_flexera
 
+# Puppet Flexera Class
+class profile::flexera (
+  String $build_dir = 'C:\temp\fnms',
+  String $extract_dir = 'C:\temp\fnms\extract',
+  String $download_url = hiera('profile::flexera::download_url','http://server02.local/repo/fnms/fnms_agent.zip'),
+  Boolean $install_flexera = hiera('profile::flexera::install_flexera','false')
+) {
   if ($install_flexera == 'true') {
-    file { 'C:\temp\fnms':
+    file { $build_dir:
       ensure => directory,
       before => Download_file['Download FlexNet Inventory Agent'],
     }
 
-    file { 'C:\temp\fnms\extract':
+    file { $extract_dir:
       ensure => directory,
       before => Exec['download-and-extract-zip'],
     }
 
     exec { 'download-and-extract-zip':
-      command     => 'Expand-Archive -Path C:\temp\fnms\fnms_agent.zip -DestinationPath C:\temp\fnms\extract',
+      command     => "Expand-Archive -Path '${build_dir}\\fnms_agent.zip' -DestinationPath ${extract_dir}",
       provider    => powershell,
       subscribe   => Download_file['Download FlexNet Inventory Agent'],
       refreshonly => true,
@@ -24,14 +31,14 @@ class profile::flexera {
 
     download_file { 'Download FlexNet Inventory Agent':
       url                   => $download_url,
-      destination_directory => 'C:\temp\fnms',
+      destination_directory => $build_dir,
       notify                => Exec['download-and-extract-zip'],
     }
 
     package { 'FlexNet Inventory Agent':
       ensure          => 'installed',
       provider        => 'windows',
-      source          => 'C:\\temp\\fnms\\extract\\FlexNet Inventory Agent.msi',
+      source          => "${extract_dir}\\FlexNet Inventory Agent.msi",
       install_options => [
         '/qn',
         'TRANSFORMS=InstallFlexNetInvAgent.mst',
