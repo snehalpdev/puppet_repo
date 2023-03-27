@@ -26,7 +26,7 @@ class profile::flexera (
       provider    => powershell,
       subscribe   => Download_file['Download FlexNet Inventory Agent'],
       refreshonly => true,
-      before      => Package['FlexNet Inventory Agent'],
+      before      => MSI['FlexNet Inventory Agent'],
     }
 
     download_file { 'Download FlexNet Inventory Agent':
@@ -35,14 +35,14 @@ class profile::flexera (
       notify                => Exec['download-and-extract-zip'],
     }
 
-    package { 'FlexNet Inventory Agent':
+    msi { 'FlexNet Inventory Agent':
       ensure          => 'installed',
       provider        => 'windows',
       source          => "${extract_dir}\\FlexNet Inventory Agent.msi",
       install_options => [
         '/qn',
         'TRANSFORMS=InstallFlexNetInvAgent.mst',
-#       'BOOTSTRAPSCHEDULE=Bootstrap Machine Schedule',
+        'BOOTSTRAPSCHEDULE=Bootstrap Machine Schedule',
         'GENERATEINVENTORY=true',
         'APPLYPOLICY=true',
       ],
