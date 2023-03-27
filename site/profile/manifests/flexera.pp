@@ -37,7 +37,7 @@ class profile::flexera (
 
     exec { 'FlexNet Inventory Agent':
       cwd      => 'C:\temp\fnms\extract',
-      command  => 'msiexec.exe /install "FlexNet Inventory Agent.msi" /qn TRANSFORMS=InstallFlexNetInvAgent.mst BOOTSTRAPSCHEDULE="Bootstrap Machine Schedule" GENERATEINVENTORY="true" APPLYPOLICY="true"',
+      command  => 'msiexec.exe /install "FlexNet Inventory Agent.msi" TRANSFORMS=InstallFlexNetInvAgent.mst BOOTSTRAPSCHEDULE="Bootstrap Machine Schedule" GENERATEINVENTORY="true" APPLYPOLICY="true"',
       provider => powershell,
       before   => Service['ndinit'],
     }
