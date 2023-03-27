@@ -2,7 +2,7 @@
 class profile::flexera {
   $download_url = hiera('profile::flexera::download_url','http://server02.local/repo/fnms/fnms_agent.zip')
   $install_flexera = hiera('profile::flexera::install_flexera','false')
-  $flexnet_installed = registry_value('HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{F56247D8-9D8D-4180-BD6D-44485EC1A3C0}', 'Displayname')
+  $flexnet_installed = exec('regquery HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{F56247D8-9D8D-4180-BD6D-44485EC1A3C0} /v Displayname')
 
   if ($install_flexera == 'true' -AND ($flexnet_installed == 'false')) {
     file { 'C:\temp\fnms':
