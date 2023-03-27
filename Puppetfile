@@ -1,7 +1,7 @@
 mod 'puppetlabs-reboot', '4.3.0'
 mod 'puppet-windowsfeature', '4.0.0'
 mod 'puppetlabs-stdlib', '8.5.0'
-mod 'puppetlabs-registry', '4.1.1'
+mod 'puppetlabs-registry', '4.1.2'
 mod 'puppetlabs-powershell', '5.2.0'
 mod 'puppetlabs-pwshlib', '0.10.3'
 mod 'puppetlabs-package', '2.3.0'
