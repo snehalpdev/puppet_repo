@@ -2,9 +2,8 @@
 class profile::flexera {
   $download_url = hiera('profile::flexera::download_url','http://server02.local/repo/fnms/fnms_agent.zip')
   $install_flexera = hiera('profile::flexera::install_flexera','false')
-  $flexnet_installed = exec('regquery HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{F56247D8-9D8D-4180-BD6D-44485EC1A3C0} /v Displayname')
 
-  if ($install_flexera == 'true' -AND ($flexnet_installed == 'false')) {
+  if ($install_flexera == 'true') {
     file { 'C:\temp\fnms':
       ensure => directory,
       before => Download_file['Download FlexNet Inventory Agent'],
@@ -21,7 +20,6 @@ class profile::flexera {
       subscribe   => Download_file['Download FlexNet Inventory Agent'],
       refreshonly => true,
       before      => Package['FlexNet Inventory Agent'],
-      notify      => Package['FlexNet Inventory Agent'],
     }
 
     download_file { 'Download FlexNet Inventory Agent':
@@ -33,7 +31,6 @@ class profile::flexera {
     package { 'FlexNet Inventory Agent':
       ensure          => 'installed',
       provider        => 'windows',
-      subscribe       => Exec['download-and-extract-zip'],
       source          => 'C:\\temp\\fnms\\extract\\FlexNet Inventory Agent.msi',
       install_options => [
         '/qn',
@@ -47,6 +44,10 @@ class profile::flexera {
     service { 'ndinit':
       ensure => running,
       enable => true,
+    }
+
+    file { 'C:\temp\fnms':
+      ensure => absent,
     }
   }
 }
