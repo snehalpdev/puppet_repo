@@ -26,7 +26,7 @@ class profile::flexera (
       provider    => powershell,
       subscribe   => Download_file['Download FlexNet Inventory Agent'],
       refreshonly => true,
-      before      => Package['FlexNet Inventory Agent'],
+      before      => Exec['FlexNet Inventory Agent'],
     }
 
     download_file { 'Download FlexNet Inventory Agent':
@@ -35,19 +35,25 @@ class profile::flexera (
       notify                => Exec['download-and-extract-zip'],
     }
 
-    package { 'FlexNet Inventory Agent':
-      ensure          => 'installed',
-      provider        => 'windows',
-      source          => "${extract_dir}\\FlexNet Inventory Agent.msi",
-      install_options => [
-        '/qn',
-        'TRANSFORMS=InstallFlexNetInvAgent.mst',
-        "BOOTSTRAPSCHEDULE=${extract_dir}\\Bootstrap Machine Schedule",
-        'GENERATEINVENTORY=true',
-        'APPLYPOLICY=true',
-      ],
-      before          => Service['ndinit'],
+    exec { 'FlexNet Inventory Agent':
+      command  => "Invoke-Item -Path '${extract_dir}\\installagent.cmd'",
+      provider => powershell,
+      before   => Service['ndinit'],
     }
+
+#    package { 'FlexNet Inventory Agent':
+#      ensure          => 'installed',
+#      provider        => 'windows',
+#      source          => "${extract_dir}\\FlexNet Inventory Agent.msi",
+#      install_options => [
+#        '/qn',
+#        'TRANSFORMS=InstallFlexNetInvAgent.mst',
+#        "BOOTSTRAPSCHEDULE=${extract_dir}\\Bootstrap Machine Schedule",
+#        'GENERATEINVENTORY=true',
+#        'APPLYPOLICY=true',
+#      ],
+#      before          => Service['ndinit'],
+#    }
     service { 'ndinit':
       ensure => running,
       enable => true,
