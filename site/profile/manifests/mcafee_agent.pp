@@ -20,7 +20,7 @@ class profile::mcafee_agent (
       command   => "${build_dir}\\FramePkg.exe /INSTALL=Agent /SILENT",
       logoutput => 'on_failure',
       log       => $logfile,
-      before    => service['masvc'],
+      before    => Service['masvc'],
     }
 
     service { 'masvc':
