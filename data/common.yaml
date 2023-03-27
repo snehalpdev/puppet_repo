@@ -2,4 +2,4 @@
 motd::windows_motd_title: |
    **** Puppet managed Windows System ****
 
-profile::flexera::install_flexera: 'true'
+profile::flexera::install_flexera: true
