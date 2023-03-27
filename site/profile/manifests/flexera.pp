@@ -46,7 +46,4 @@ class profile::flexera {
       enable => true,
     }
   }
-  file { 'C:\temp\fnms':
-    ensure => absent,
-  }
 }
