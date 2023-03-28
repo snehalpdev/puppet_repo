@@ -37,6 +37,7 @@ class profile::mcafee_ens (
 
     exec { 'Mcafee ENS':
       command   => "${extract_dir}\\setupEP.exe ADDLOCAL='tp' /qn",
+      provider  => windows,
       logoutput => 'on_failure',
       require   => Class['profile::mcafee_agent'],
     }
