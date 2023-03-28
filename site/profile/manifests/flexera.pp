@@ -36,17 +36,17 @@ class profile::flexera (
     }
 
     package { 'FlexNet Inventory Agent':
-      ensure           => 'installed',
-      provider         => 'windows',
-      source           => "${extract_dir}\\FlexNet Inventory Agent.msi",
-      install_options  => [
+      ensure          => 'installed',
+      provider        => 'windows',
+      source          => "${extract_dir}\\FlexNet Inventory Agent.msi",
+      install_options => [
         '/qn',
         'TRANSFORMS=InstallFlexNetInvAgent.mst',
 #       'BOOTSTRAPSCHEDULE=Bootstrap Machine Schedule.nds',
         'GENERATEINVENTORY=true',
         'APPLYPOLICY=true',
       ],
-      before           => Service['ndinit'],
+      before          => Service['ndinit'],
     }
     service { 'ndinit':
       ensure => running,

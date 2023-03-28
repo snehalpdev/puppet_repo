@@ -1,6 +1,5 @@
 # @param build_dir
 # @param extract_dir
-# @param logfile
 # @param download_url
 # @param install_mcafee_ens
 
@@ -8,7 +7,6 @@
 class profile::mcafee_ens (
   String $build_dir = 'C:\temp\mcafee_ens',
   String $extract_dir = 'C:\temp\mcafee_ens\extract',
-  String $logfile = 'C:\temp\mcafee_ens_install.log',
   String $download_url = hiera('profile::mcafee_ens::download_url','http://server02.local/repo/mcafee_ens/mcafee_ens.zip'),
   $install_mcafee_ens = hiera('profile::mcafee_ens::install_mcafee_ens','false')
 ) {
@@ -39,8 +37,7 @@ class profile::mcafee_ens (
 
     exec { 'McAfee Endpoint Network Security':
       command   => "${extract_dir}\\setupEP.exe ADDLOCAL='tp' /qn",
-#     logoutput => 'on_failure',
-      logoutput => $logfile,
+      logoutput => 'on_failure',
       require   => Class['profile::mcafee_agent'],
     }
   }
