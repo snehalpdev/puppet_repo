@@ -40,7 +40,6 @@ class profile::flexera (
       ensure          => 'installed',
       provider        => 'windows',
       subscribe       => Exec['Extract Flexera'],
-      refreshonly     => true,
       source          => "${extract_dir}\\FlexNet Inventory Agent.msi",
       install_options => [
         '/qn',
