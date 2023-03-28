@@ -39,8 +39,8 @@ class profile::mcafee_ens (
 
     exec { 'McAfee Endpoint Network Security':
       command   => "${extract_dir}\\setupEP.exe ADDLOCAL='tp' /qn",
-      logoutput => 'on_failure',
-      log       => $logfile,
+#     logoutput => 'on_failure',
+      logoutput => $logfile,
       require   => Class['profile::mcafee_agent'],
     }
   }

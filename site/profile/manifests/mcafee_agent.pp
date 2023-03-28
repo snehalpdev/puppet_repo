@@ -18,8 +18,8 @@ class profile::mcafee_agent (
     }
     exec { 'McAfee Endpoint Agent':
       command   => "${build_dir}\\FramePkg.exe /INSTALL=Agent /SILENT",
-      logoutput => 'on_failure',
-      log       => $logfile,
+#     logoutput => 'on_failure',
+      logoutput => $logfile,
       before    => Service['masvc'],
     }
 
