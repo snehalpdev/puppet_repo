@@ -35,7 +35,7 @@ class profile::mcafee_ens (
       notify                => Exec['Extract Mcafee ENS'],
     }
 
-    exec { 'McAfee ENS':
+    exec { 'Mcafee ENS':
       command   => "${extract_dir}\\setupEP.exe ADDLOCAL='tp' /qn",
       logoutput => 'on_failure',
       require   => Class['profile::mcafee_agent'],
