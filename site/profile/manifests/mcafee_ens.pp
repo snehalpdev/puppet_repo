@@ -13,29 +13,29 @@ class profile::mcafee_ens (
   if ($install_mcafee_ens == 'true') {
     file { $build_dir:
       ensure => directory,
-      before => Download_file['Download Mcafee Endpoint Network Security'],
+      before => Download_file['Download Mcafee ENS'],
     }
 
     file { $extract_dir:
       ensure => directory,
-      before => Exec['download-and-extract-zip'],
+      before => Exec['Extract Mcafee ENS'],
     }
 
-    exec { 'download-and-extract-zip':
+    exec { 'Extract Mcafee ENS':
       command     => "Expand-Archive -Path '${build_dir}\\mcafee_ens.zip' -DestinationPath ${extract_dir}",
       provider    => powershell,
-      subscribe   => Download_file['Download Mcafee Endpoint Network Security'],
+      subscribe   => Download_file['Download Mcafee ENS'],
       refreshonly => true,
-      before      => Exec['Mcafee Endpoint Network Security'],
+      before      => Exec['Mcafee ENS'],
     }
 
-    download_file { 'Download Mcafee Endpoint Network Security':
+    download_file { 'Download Mcafee ENS':
       url                   => $download_url,
       destination_directory => $build_dir,
-      notify                => Exec['download-and-extract-zip'],
+      notify                => Exec['Extract Mcafee ENS'],
     }
 
-    exec { 'McAfee Endpoint Network Security':
+    exec { 'McAfee ENS':
       command   => "${extract_dir}\\setupEP.exe ADDLOCAL='tp' /qn",
       logoutput => 'on_failure',
       require   => Class['profile::mcafee_agent'],

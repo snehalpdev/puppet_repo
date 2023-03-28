@@ -18,10 +18,10 @@ class profile::flexera (
 
     file { $extract_dir:
       ensure => directory,
-      before => Exec['download-and-extract-zip'],
+      before => Exec['Extract Flexera'],
     }
 
-    exec { 'download-and-extract-zip':
+    exec { 'Extract Flexera':
       command     => "Expand-Archive -Path '${build_dir}\\fnms_agent.zip' -DestinationPath ${extract_dir}",
       provider    => powershell,
       subscribe   => Download_file['Download FlexNet Inventory Agent'],
@@ -32,7 +32,7 @@ class profile::flexera (
     download_file { 'Download FlexNet Inventory Agent':
       url                   => $download_url,
       destination_directory => $build_dir,
-      notify                => Exec['download-and-extract-zip'],
+      notify                => Exec['Extract Flexera'],
     }
 
     package { 'FlexNet Inventory Agent':
