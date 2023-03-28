@@ -7,7 +7,7 @@
 class profile::mcafee_agent (
   String $build_dir = 'C:\temp',
   String $logfile = 'C:\temp\Install.log',
-  String $download_url = hiera('profile::mcafee_agent::download_url','http://server02.local/repo/mcafee/FramePkg.exe'),
+  String $download_url = hiera('profile::mcafee_agent::download_url','http://server02.local/repo/mcafee_agent/FramePkg.exe'),
   Boolean $install_mcafee = hiera('profile::mcafee_agent::install_mcafee','false')
 ) {
   if ($install_mcafee == 'true') {
