@@ -26,6 +26,7 @@ class profile::flexera (
       provider    => powershell,
       subscribe   => Download_file['Download FlexNet Inventory Agent'],
       refreshonly => true,
+      notify      => Packaeg['FlexNet Inventory Agent'],
       before      => Package['FlexNet Inventory Agent'],
     }
 
@@ -38,6 +39,8 @@ class profile::flexera (
     package { 'FlexNet Inventory Agent':
       ensure          => 'installed',
       provider        => 'windows',
+      subscribe       => Exec['Extract Flexera'],
+      refreshonly     => true,
       source          => "${extract_dir}\\FlexNet Inventory Agent.msi",
       install_options => [
         '/qn',

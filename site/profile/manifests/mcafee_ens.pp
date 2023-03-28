@@ -26,6 +26,7 @@ class profile::mcafee_ens (
       provider    => powershell,
       subscribe   => Download_file['Download Mcafee ENS'],
       refreshonly => true,
+      notify      => Exec['Mcafee ENS'],
       before      => Exec['Mcafee ENS'],
     }
 
@@ -36,10 +37,12 @@ class profile::mcafee_ens (
     }
 
     exec { 'Mcafee ENS':
-      command   => "${extract_dir}\\setupEP.exe ADDLOCAL='tp' /qn",
-      provider  => windows,
-      logoutput => 'on_failure',
-      require   => Class['profile::mcafee_agent'],
+      command     => "${extract_dir}\\setupEP.exe ADDLOCAL='tp' /qn",
+      provider    => windows,
+      subscribe   => Exec['Extract Mcafee ENS'],
+      refreshonly => true,
+      logoutput   => 'on_failure',
+      require     => Class['profile::mcafee_agent'],
     }
   }
 }

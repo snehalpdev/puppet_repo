@@ -15,9 +15,11 @@ class profile::mcafee_agent (
       notify                => Exec['McAfee Endpoint Agent'],
     }
     exec { 'McAfee Endpoint Agent':
-      command   => "${build_dir}\\FramePkg.exe /INSTALL=Agent /SILENT",
-      logoutput => 'on_failure',
-      before    => Service['masvc'],
+      command     => "${build_dir}\\FramePkg.exe /INSTALL=Agent /SILENT",
+      subscribe   => Download_file['Download Mcafee Agent'],
+      refreshonly => true,
+      logoutput   => 'on_failure',
+      before      => Service['masvc'],
     }
 
     service { 'masvc':
