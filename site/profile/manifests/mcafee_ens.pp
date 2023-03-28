@@ -40,6 +40,7 @@ class profile::mcafee_ens (
       cwd         => $extract_dir,
       command     => "${extract_dir}\\setupEP.exe ADDLOCAL='tp' /qn",
       provider    => windows,
+      run_as      => 'Administrator',
       subscribe   => Exec['Extract Mcafee ENS'],
       refreshonly => true,
       logoutput   => 'on_failure',
