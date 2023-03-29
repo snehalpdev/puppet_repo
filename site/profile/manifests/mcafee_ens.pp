@@ -36,7 +36,7 @@ class profile::mcafee_ens (
       notify                => Exec['Extract Mcafee ENS'],
     }
 
-    registry_value { 'HKLM\SYSTEM\CurrentControlSet\Control\Network':
+    registry_value { 'HKLM\SYSTEM\CurrentControlSet\Control\Network\MaxNumFilters':
       ensure => present,
       type   => REG_DWORD,
       data   => 14,
