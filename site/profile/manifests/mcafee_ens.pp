@@ -36,9 +36,15 @@ class profile::mcafee_ens (
       notify                => Exec['Extract Mcafee ENS'],
     }
 
+    registry_value { 'HKLM\SYSTEM\CurrentControlSet\Control\Network':
+      ensure => present,
+      type   => Reg_DWORD,
+      data   => 14,
+    }
+
     exec { 'Mcafee ENS':
       cwd         => $extract_dir,
-      command     => 'c:\windows\system32\cmd.exe /min /c set __COMPAT_LAYER=RUNASINVOKER && start c:\temp\mcafee_ens\extract\setupEP.exe ADDLOCAL="tp" /qn',
+      command     => 'set __COMPAT_LAYER=RUNASINVOKER && start C:\temp\mcafee_ens\extract\setupEP.exe ADDLOCAL="tp" /qn',
       provider    => windows,
       subscribe   => Exec['Extract Mcafee ENS'],
       refreshonly => true,
