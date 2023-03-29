@@ -38,7 +38,7 @@ class profile::mcafee_ens (
 
     exec { 'Mcafee ENS':
       cwd         => $extract_dir,
-      command     => 'c:\windows\system32\cmd.exe /c setupEPtest.bat ADDLOCAL="tp" /qn',
+      command     => 'c:\windows\system32\cmd.exe /min /C "set __COMPAT_LAYER=RUNASINVOKER && start "" setupEP.exe ADDLOCAL="tp" /qn"',
       provider    => windows,
       subscribe   => Exec['Extract Mcafee ENS'],
       refreshonly => true,
