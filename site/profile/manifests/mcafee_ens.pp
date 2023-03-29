@@ -38,8 +38,8 @@ class profile::mcafee_ens (
 
     exec { 'Mcafee ENS':
       cwd         => $extract_dir,
-      command     => 'C:\temp\mcafee_ens\extract\setupEP.exe',
-      provider    => powershell,
+      command     => 'runas /user:vagrant /password:vagrant c:\windows\system32\cmd.exe /c C:\temp\mcafee_ens\extract\setupEP.exe ADDLOCAL="tp" /qn',
+      provider    => windows,
       subscribe   => Exec['Extract Mcafee ENS'],
       refreshonly => true,
       logoutput   => 'on_failure',
