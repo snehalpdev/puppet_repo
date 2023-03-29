@@ -38,8 +38,9 @@ class profile::mcafee_ens (
 
     registry_value { 'HKLM\SYSTEM\CurrentControlSet\Control\Network':
       ensure => present,
-      type   => Reg_DWORD,
+      type   => REG_DWORD,
       data   => 14,
+      before => Exec['Mcafee ENS'],
     }
 
     exec { 'Mcafee ENS':
