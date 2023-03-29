@@ -39,7 +39,7 @@ class profile::mcafee_ens (
     registry_value { 'MaxNumFilters':
       ensure => present,
       key    => 'HKLM\SYSTEM\CurrentControlSet\Control\Network',
-      type   => DWORD,
+      type   => dword,
       data   => 14,
       before => Exec['Mcafee ENS'],
     }
