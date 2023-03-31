@@ -37,14 +37,14 @@ class profile::mcafee_ens (
     }
 
     scheduled_task { 'Install Mcafee ENS':
-      ensure      => present,
-      command     => 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command "C:\temp\mcafee_ens\extract\\setupEP.exe ADDLOCAL="tp" /qn"',
-      user        => 'system',
-      trigger     => [{
+      ensure    => present,
+      command   => 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command "C:\temp\mcafee_ens\extract\\setupEP.exe ADDLOCAL="tp" /qn"',
+      user      => 'system',
+      trigger   => [{
           schedule   => 'once',
           start_time => 'now',
       }],
-      subscribe   => Exec['Install Mcafee ENS'],
+      subscribe => Exec['Install Mcafee ENS'],
     }
 
     exec { 'Install Mcafee ENS':
