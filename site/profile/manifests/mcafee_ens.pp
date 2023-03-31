@@ -41,9 +41,8 @@ class profile::mcafee_ens (
       command   => 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command "C:\temp\mcafee_ens\extract\\setupEP.exe ADDLOCAL="tp" /qn"',
       user      => 'system',
       trigger   => [{
-          schedule   => 'once',
-          start_date => inline_template("<%= Time.at($:timestamp).strftime('%Y-%m-%d') %>"),
-          start_time => inline_template("<%= Time.at($:timestamp).strftime('%H:%M:%S') %>"),
+          schedule    => 'once',
+          time_object => TimeSpan(0)
       }],
       subscribe => Exec['Install Mcafee ENS'],
     }
