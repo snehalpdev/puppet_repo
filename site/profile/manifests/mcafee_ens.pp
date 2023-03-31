@@ -50,9 +50,10 @@ class profile::mcafee_ens (
     }
 
     exec { 'Install Mcafee ENS':
-      command   => '',
-      subscribe => Exec['Extract Mcafee ENS'],
-      require   => Class['profile::mcafee_agent'],
+      command     => '',
+      subscribe   => Exec['Extract Mcafee ENS'],
+      refreshonly => true,
+      require     => Class['profile::mcafee_agent'],
     }
   }
 }
