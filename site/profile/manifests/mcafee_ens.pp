@@ -49,8 +49,7 @@ class profile::mcafee_ens (
     }
 
     exec { 'Install Mcafee ENS':
-      command     => '',
-      path        => 'C:/Windows/system32',
+      command     => 'C:\Windows\System32',
       subscribe   => Exec['Extract Mcafee ENS'],
       refreshonly => true,
       require     => Class['profile::mcafee_agent'],
