@@ -43,6 +43,7 @@ class profile::mcafee_ens (
       run_level   => 'highest',
       trigger     => [{
           schedule   => 'once',
+          start_date => 'now',
           start_time => 'now',
       }],
       subscribe   => Exec['Install Mcafee ENS'],
