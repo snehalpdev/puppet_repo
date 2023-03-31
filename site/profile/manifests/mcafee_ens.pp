@@ -42,7 +42,7 @@ class profile::mcafee_ens (
       user      => 'system',
       trigger   => [{
           schedule   => 'once',
-          start_time => strftime(timestamp(0)),
+          start_time => Timestamp(0).strftime('%H:%M:%S'),
       }],
       subscribe => Exec['Install Mcafee ENS'],
     }
