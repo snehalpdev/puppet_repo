@@ -8,7 +8,7 @@ class profile::mcafee_ens (
   String $build_dir = 'C:\temp\mcafee_ens',
   String $extract_dir = 'C:\temp\mcafee_ens\extract',
   String $download_url = hiera('profile::mcafee_ens::download_url','http://server02.local/repo/mcafee_ens/mcafee_ens.zip'),
-  $install_mcafee_ens = hiera('profile::mcafee_ens::install_mcafee_ens','false')
+  String $install_mcafee_ens = hiera('profile::mcafee_ens::install_mcafee_ens','false')
 ) {
   if ($install_mcafee_ens == 'true') {
     file { $build_dir:
@@ -26,8 +26,8 @@ class profile::mcafee_ens (
       provider    => powershell,
       subscribe   => Download_file['Download Mcafee ENS'],
       refreshonly => true,
-      notify      => Exec['Mcafee ENS'],
-      before      => Exec['Mcafee ENS'],
+      notify      => Exec['Install Mcafee ENS'],
+      before      => Exec['Install Mcafee ENS'],
     }
 
     download_file { 'Download Mcafee ENS':
@@ -36,14 +36,23 @@ class profile::mcafee_ens (
       notify                => Exec['Extract Mcafee ENS'],
     }
 
-    exec { 'Mcafee ENS':
-      cwd         => $extract_dir,
-      command     => 'c:\windows\system32\cmd.exe /min /C "set __COMPAT_LAYER=RUNASINVOKER && start "setupEP1.bat',
-      provider    => windows,
-      subscribe   => Exec['Extract Mcafee ENS'],
+    scheduled_task { 'Install Mcafee ENS':
+      ensure      => present,
+      command     => 'powershell.exe -command "C:\temp\mcafee_ens\extract\\setupEP.exe ADDLOCAL="tp" /qn"',
+      start_time  => 'now',
+      run_level   => 'highest',
+      trigger     => {
+        schedule_type => 'once',
+        start_time    => 'now',
+      },
+      subscribe   => Exec['Install Mcafee ENS'],
       refreshonly => true,
-      logoutput   => 'on_failure',
-      require     => Class['profile::mcafee_agent'],
+    }
+
+    exec { 'Install Mcafee ENS':
+      command   => '',
+      subscribe => Exec['Extract Mcafee ENS'],
+      require   => Class['profile::mcafee_agent'],
     }
   }
 }
