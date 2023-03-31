@@ -45,7 +45,6 @@ class profile::mcafee_ens (
           start_time => 'now',
       }],
       subscribe   => Exec['Install Mcafee ENS'],
-      refreshonly => true,
     }
 
     exec { 'Install Mcafee ENS':
