@@ -46,6 +46,7 @@ class profile::mcafee_ens (
           start_date => strftime('%Y-%m-%d'),
           start_time => strftime('%H:%M:%S'),
       }],
+      run_now   => true,
       subscribe => Exec['Install Mcafee ENS'],
     }
 
