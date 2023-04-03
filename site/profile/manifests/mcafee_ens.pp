@@ -48,7 +48,7 @@ class profile::mcafee_ens (
       subscribe => Exec['Extract Mcafee ENS'],
     }
 
-    exec { 'Install Mcafee ENS':
+    exec { 'run task':
       command     => 'schtasks /run /tn "Install Mcafee ENS"',
       provider    => powershell,
       subscribe   => Schedule_task['Install Mcafee ENS'],
