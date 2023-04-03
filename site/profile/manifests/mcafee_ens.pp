@@ -45,12 +45,13 @@ class profile::mcafee_ens (
           start_date => strftime('%Y-%m-%d'),
           start_time => strftime('%H:%M:%S'),
       }],
-      subscribe => Exec['Install Mcafee ENS'],
+      subscribe => Exec['Extract Mcafee ENS'],
     }
 
     exec { 'Install Mcafee ENS':
-      command     => 'C:\Windows\System32',
-      subscribe   => Exec['Extract Mcafee ENS'],
+      command     => 'schtasks /run /tn "Install Mcafee ENS"',
+      provider    => powershell,
+      subscribe   => Schedule_task['Install Mcafee ENS'],
       refreshonly => true,
       require     => Class['profile::mcafee_agent'],
     }
