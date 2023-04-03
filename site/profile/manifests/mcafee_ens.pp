@@ -43,7 +43,7 @@ class profile::mcafee_ens (
       trigger   => [{
           schedule   => 'once',
           start_date => strftime('%Y-%m-%d'),
-          start_time => (time() + Duration.new('PT1M')).strftime('%H:%M:%S'),
+          start_time => powershell('([datetime]::ParseExact((Get-Date).ToString("HH:mm:ss"), 'HH:mm:ss', $null)).AddMinutes(1).ToString('HH:mm:ss')'),
       }],
       subscribe => Exec['Install Mcafee ENS'],
     }
