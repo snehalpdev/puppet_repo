@@ -43,7 +43,7 @@ class profile::mcafee_ens (
       trigger   => [{
           schedule   => 'once',
           start_date => strftime('%Y-%m-%d'),
-          start_time => ((Get-Date).AddMinutes(1)).ToString('HH:mm:ss'),
+          start_time => strftime('%H:%M+1:%S'),
       }],
       subscribe => Exec['Install Mcafee ENS'],
     }
