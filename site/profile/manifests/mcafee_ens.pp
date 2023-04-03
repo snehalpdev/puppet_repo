@@ -50,9 +50,10 @@ class profile::mcafee_ens (
     }
 
     exec { 'run task':
-      command  => 'schtasks /run /tn "Install Mcafee ENS"',
-      provider => powershell,
-      require  => Class['profile::mcafee_agent'],
+      command   => 'schtasks /run /tn "Install Mcafee ENS"',
+      provider  => powershell,
+      subscribe => Scheduled_task['Install Mcafee ENS'],
+      require   => Class['profile::mcafee_agent'],
     }
   }
 }
