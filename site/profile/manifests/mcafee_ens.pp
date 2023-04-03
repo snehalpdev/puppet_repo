@@ -26,8 +26,8 @@ class profile::mcafee_ens (
       provider    => powershell,
       subscribe   => Download_file['Download Mcafee ENS'],
       refreshonly => true,
-      notify      => Exec['Install Mcafee ENS'],
-      before      => Exec['Install Mcafee ENS'],
+      notify      => Scheduled_task['Install Mcafee ENS'],
+      before      => Scheduled_task['Install Mcafee ENS'],
     }
 
     download_file { 'Download Mcafee ENS':
