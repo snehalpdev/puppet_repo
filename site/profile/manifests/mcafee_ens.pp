@@ -36,11 +36,6 @@ class profile::mcafee_ens (
       notify                => Exec['Extract Mcafee ENS'],
     }
 
-    exec { 'test':
-      command  => "Unregister-ScheduledTask -TaskName test -Confirm:\$false -ErrorAction SilentlyContinue;Register-ScheduledTask -Action (New-ScheduledTaskAction -Execute 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command "C:\temp\mcafee_ens\extract\\setupEP.exe ADDLOCAL="tp" /qn"') -Trigger (New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1).ToString(\"HH:mm\")) -TaskName Test -User system -RunLevel Highest"
-      provider => powershell,
-    }
-
     scheduled_task { 'Install Mcafee ENS':
       ensure    => present,
       command   => 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command "C:\temp\mcafee_ens\extract\\setupEP.exe ADDLOCAL="tp" /qn"',
