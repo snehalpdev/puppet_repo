@@ -42,7 +42,6 @@ class profile::mcafee_ens (
       user      => 'system',
       trigger   => [{
           schedule   => 'once',
-          idle_time  => 'PT5M',
           start_date => strftime('%Y-%m-%d'),
           start_time => strftime('%H:%M:%S'),
       }],
