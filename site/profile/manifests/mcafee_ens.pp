@@ -41,10 +41,10 @@ class profile::mcafee_ens (
       command   => 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -command "C:\temp\mcafee_ens\extract\\setupEP.exe ADDLOCAL="tp" /qn"',
       user      => 'system',
       trigger   => [{
-          schedule             => 'once',
-          start_date           => strftime('%Y-%m-%d'),
-          start_time           => strftime('%H:%M:%S'),
-          start_when_available => true,
+          schedule   => 'once',
+          start_date => strftime('%Y-%m-%d'),
+          start_time => strftime('%H:%M:%S'),
+          end_time   => strftime('%H:%M:%S')
       }],
       subscribe => Exec['Install Mcafee ENS'],
     }
