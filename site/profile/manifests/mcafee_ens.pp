@@ -26,8 +26,8 @@ class profile::mcafee_ens (
       provider    => powershell,
       subscribe   => Download_file['Download Mcafee ENS'],
       refreshonly => true,
-      notify      => Exec['Install Mcafee ENS'],
-      before      => Exec['Install Mcafee ENS'],
+      notify      => Package['Install Mcafee ENS'],
+      before      => Package['Install Mcafee ENS'],
     }
 
     download_file { 'Download Mcafee ENS':
@@ -36,12 +36,16 @@ class profile::mcafee_ens (
       notify                => Exec['Extract Mcafee ENS'],
     }
 
-    exec { 'Install Mcafee ENS':
-      command   => 'C:\temp\mcafee_ens\extract\setupEP.exe ADDLOCAL="tp" /qn',
-      provider  => windows,
-      runas     => 'Administrator',
-      subscribe => Exec['Extract Mcafee ENS'],
-      require   => Class['profile::mcafee_agent'],
+    package { 'Install Mcafee ENS':
+      ensure          => 'installed',
+      provider        => 'windows',
+      subscribe       => Exec['Extract Mcafee ENS'],
+      source          => 'C:\temp\mcafee_ens\extract\setupEP.exe',
+      install_options => [
+        '/qn',
+        'ADDLOCAL="tp"',
+      ],
+      require         => Class['profile::mcafee_agent'],
     }
   }
 }
