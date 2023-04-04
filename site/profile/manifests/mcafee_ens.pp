@@ -44,7 +44,6 @@ class profile::mcafee_ens (
       install_options => [
         '/qn',
         'ADDLOCAL="tp"',
-        '/n',
       ],
       require         => Class['profile::mcafee_agent'],
     }
