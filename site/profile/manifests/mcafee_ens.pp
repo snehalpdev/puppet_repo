@@ -26,8 +26,8 @@ class profile::mcafee_ens (
       provider    => powershell,
       subscribe   => Download_file['Download Mcafee ENS'],
       refreshonly => true,
-      notify      => Scheduled_task['Install Mcafee ENS'],
-      before      => Scheduled_task['Install Mcafee ENS'],
+      notify      => Exec['Install Mcafee ENS'],
+      before      => Exec['Install Mcafee ENS'],
     }
 
     download_file { 'Download Mcafee ENS':
@@ -36,24 +36,11 @@ class profile::mcafee_ens (
       notify                => Exec['Extract Mcafee ENS'],
     }
 
-    scheduled_task { 'Install Mcafee ENS':
-      ensure    => present,
-      command   => 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe',
-      arguments => 'C:\temp\mcafee_ens\extract\\setupEP.exe ADDLOCAL="tp" /qn',
-      user      => 'system',
-      trigger   => [{
-          schedule   => 'once',
-          start_date => strftime('%Y-%m-%d'),
-          start_time => strftime('%H:%M:%S'),
-      }],
+    exec { 'Install Mcafee ENS':
+      command   => 'C:\temp\mcafee_ens\extract\setupEP.exe ADDLOCAL="tp" /qn',
+      provider  => windows,
+      runas     => 'Administrator',
       subscribe => Exec['Extract Mcafee ENS'],
-      before    => Exec['run task'],
-    }
-
-    exec { 'run task':
-      command   => 'schtasks /run /tn "Install Mcafee ENS"',
-      provider  => powershell,
-      subscribe => Scheduled_task['Install Mcafee ENS'],
       require   => Class['profile::mcafee_agent'],
     }
   }
