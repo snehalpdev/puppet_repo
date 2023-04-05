@@ -10,7 +10,7 @@ class profile::flexera (
   String $download_url = hiera('profile::flexera::download_url','http://server02.local/repo/fnms/fnms_agent.zip'),
   Boolean $install_flexera = hiera('profile::flexera::install_flexera',false)
 ) {
-  if ($install_flexera = true) {
+  if ($install_flexera == true) {
     file { $build_dir:
       ensure => directory,
       before => Download_file['Download FlexNet Inventory Agent'],
