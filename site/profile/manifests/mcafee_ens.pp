@@ -40,6 +40,7 @@ class profile::mcafee_ens (
       ensure          => 'installed',
       provider        => 'windows',
       subscribe       => Exec['Extract Mcafee ENS'],
+      refreshonly     => true,
       source          => "${extract_dir}\\setupEP.exe",
       install_options => [
         '/qn',
