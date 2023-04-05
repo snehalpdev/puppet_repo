@@ -8,9 +8,9 @@ class profile::mcafee_ens (
   String $build_dir = 'C:\temp\mcafee_ens',
   String $extract_dir = 'C:\temp\mcafee_ens\extract',
   String $download_url = hiera('profile::mcafee_ens::download_url','http://server02.local/repo/mcafee_ens/mcafee_ens.zip'),
-  String $install_mcafee_ens = hiera('profile::mcafee_ens::install_mcafee_ens','false')
+  Boolean $install_mcafee_ens = hiera('profile::mcafee_ens::install_mcafee_ens',false)
 ) {
-  if ($install_mcafee_ens == 'true') {
+  if ($install_mcafee_ens == true) {
     file { $build_dir:
       ensure => directory,
       before => Download_file['Download Mcafee ENS'],

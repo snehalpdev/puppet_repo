@@ -14,9 +14,9 @@ class profile::crowdstrike (
   Optional[String] $falcon_proxy_port = hiera('profile::crowdstrike::falcon_proxy_port',undef),
   String $build_dir = 'C:\temp',
   String $download_url = hiera('profile::crowdstrike::download_url','http://server02.local/repo/CrowdStrike/WindowsSensor.exe'),
-  Boolean $install_crowdstrike = hiera('profile::crowdstrike::install_crowdstrike','false')
+  Boolean $install_crowdstrike = hiera('profile::crowdstrike::install_crowdstrike',false)
 ) {
-  if ($install_crowdstrike == 'true') {
+  if ($install_crowdstrike == true) {
     download_file { 'Download CrowdStrike':
       url                   => $download_url,
       destination_directory => $build_dir,
