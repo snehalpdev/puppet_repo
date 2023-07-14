@@ -48,16 +48,18 @@ class windows_splunk::install (
         'AGREETOLICENSE=yes',
         'LAUNCHSPLUNK=0',
       ],
+      notify          => file[$target_dir],
       before          => Class['windows_splunk::service'],
     }
 
     file { $target_dir:
-      ensure  => directory,
-      source  => "${extract_dir}\\deploymentclient",
-      recurse => true,
-      replace => true,
-      require => Package['Splunk'],
-      before  => Class['windows_splunk::config'],
+      ensure    => directory,
+      source    => "${extract_dir}\\deploymentclient",
+      recurse   => true,
+      replace   => true,
+      require   => Package['Splunk'],
+      subscribe => Package['Splunk'],
+      before    => Class['windows_splunk::config'],
     }
   }
 }
