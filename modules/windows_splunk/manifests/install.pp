@@ -48,7 +48,7 @@ class windows_splunk::install (
         'AGREETOLICENSE=yes',
         'LAUNCHSPLUNK=0',
       ],
-      notify          => file['$target_dir'],
+      notify          => File[$target_dir],
       before          => Class['windows_splunk::service'],
     }
 
