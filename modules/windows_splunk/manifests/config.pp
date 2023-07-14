@@ -7,14 +7,7 @@ class windows_splunk::config (
 ) {
   file { $target_file:
     ensure  => file,
-    owner   => 'Administrators',
-    group   => 'Administrators',
     content => template('windows_splunk/deploymentclient.erb'),
-    rights  => [
-      { identity => 'Administrators', rights => ['full'] },
-      { identity => 'SYSTEM', rights => ['read','execute'] },
-      { identity => 'Users', rights => ['read'] },
-    ],
     notify  => Class['windows_splunk::service'],
   }
 }
