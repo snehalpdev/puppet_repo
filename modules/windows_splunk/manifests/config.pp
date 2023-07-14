@@ -9,7 +9,7 @@ class windows_splunk::config (
     ensure  => file,
     owner   => 'Administrators',
     group   => 'Administrators',
-    content => template('splunk/deploymentclient.erb'),
+    content => template('windows_splunk/deploymentclient.erb'),
     rights  => [
       { identity => 'Administrators', rights => ['full'] },
       { identity => 'SYSTEM', rights => ['read','execute'] },
