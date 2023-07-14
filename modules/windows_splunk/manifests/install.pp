@@ -39,7 +39,7 @@ class windows_splunk::install (
     }
 
     package { 'Splunk':
-      ensure          => 'installed',
+      ensure          => 'present',
       provider        => 'windows',
       subscribe       => Exec['Extract Splunk'],
       source          => "${extract_dir}\\splunkforwarder-8.2.3-cd0848707637-x64-release.msi",
@@ -48,7 +48,6 @@ class windows_splunk::install (
         'AGREETOLICENSE=yes',
         'LAUNCHSPLUNK=0',
       ],
-      unless          => 'Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -eq "UniversalForwarder" }',
       notify          => File[$target_dir],
       before          => Class['windows_splunk::service'],
     }
