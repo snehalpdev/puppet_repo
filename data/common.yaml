@@ -5,3 +5,4 @@ motd::windows_motd_title: |
 profile::flexera::install_flexera: true
 profile::mcafee_agent::install_mcafee: true
 profile::mcafee_ens::install_mcafee_ens: true
+windows_splunk::install_splunk: true

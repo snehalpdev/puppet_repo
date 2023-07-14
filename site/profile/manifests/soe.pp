@@ -4,4 +4,5 @@ class profile::soe {
   include profile::flexera
   include profile::mcafee_agent
   include profile::mcafee_ens
+  include windows_splunk
 }
