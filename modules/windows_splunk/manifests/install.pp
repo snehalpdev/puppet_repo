@@ -53,8 +53,12 @@ class windows_splunk::install (
 
     file { $target_dir:
       ensure  => directory,
+      mode    => '0755',
+      owner   => 'Administrators',
+      group   => 'Administrators',
       source  => "${extract_dir}\\deploymentclient",
       recurse => true,
+      replace => true,
       before  => Class['windows_splunk::config'],
     }
   }
