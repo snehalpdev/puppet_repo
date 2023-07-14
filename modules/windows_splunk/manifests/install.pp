@@ -15,33 +15,33 @@ class windows_splunk::install (
   if ($install_splunk == true) {
     file { $build_dir:
       ensure => directory,
-      before => Download_file['Download Splunk'],
+      before => Download_file['Download UniversalForwarder'],
     }
 
     file { $extract_dir:
       ensure => directory,
-      before => Exec['Extract Splunk'],
+      before => Exec['Extract UniversalForwarder'],
     }
 
-    download_file { 'Download Splunk':
+    download_file { 'Download UniversalForwarder':
       url                   => $download_url,
       destination_directory => $build_dir,
-      notify                => Exec['Extract Splunk'],
+      notify                => Exec['Extract UniversalForwarder'],
     }
 
-    exec { 'Extract Splunk':
+    exec { 'Extract UniversalForwarder':
       command     => "Expand-Archive -Path '${build_dir}\\splunk.zip' -DestinationPath ${extract_dir}",
       provider    => powershell,
-      subscribe   => Download_file['Download Splunk'],
+      subscribe   => Download_file['Download UniversalForwarder'],
       refreshonly => true,
-      notify      => Package['Splunk'],
-      before      => Package['Splunk'],
+      notify      => Package['UniversalForwarder'],
+      before      => Package['UniversalForwarder'],
     }
 
-    package { 'Splunk':
+    package { 'UniversalForwarder':
       ensure          => 'present',
       provider        => 'windows',
-      subscribe       => Exec['Extract Splunk'],
+      subscribe       => Exec['Extract UniversalForwarder'],
       source          => "${extract_dir}\\splunkforwarder-8.2.3-cd0848707637-x64-release.msi",
       install_options => [
         '/quiet',
@@ -57,8 +57,8 @@ class windows_splunk::install (
       source    => "${extract_dir}\\deploymentclient",
       recurse   => true,
       replace   => true,
-      require   => Package['Splunk'],
-      subscribe => Package['Splunk'],
+      require   => Package['UniversalForwarder'],
+      subscribe => Package['UniversalForwarder'],
       before    => Class['windows_splunk::config'],
     }
   }
