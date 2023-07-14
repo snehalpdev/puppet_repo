@@ -48,6 +48,7 @@ class windows_splunk::install (
         'AGREETOLICENSE=yes',
         'LAUNCHSPLUNK=0',
       ],
+      unless          => 'Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -eq "UniversalForwarder" }',
       notify          => File[$target_dir],
       before          => Class['windows_splunk::service'],
     }
