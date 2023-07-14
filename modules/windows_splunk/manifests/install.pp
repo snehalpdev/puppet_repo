@@ -44,7 +44,7 @@ class windows_splunk::install (
       subscribe       => Exec['Extract Splunk'],
       source          => "${extract_dir}\\splunkforwarder-8.2.3-cd0848707637-x64-release.msi",
       install_options => [
-        '/quite',
+        '/quiet',
         'AGREETOLICENSE=yes',
         'LAUNCHSPLUNK=0',
       ],
