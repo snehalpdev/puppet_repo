@@ -8,8 +8,8 @@
 class windows_splunk::install (
   String $build_dir = $windows_splunk::build_dir,
   String $extract_dir = $windows_splunk::extract_dir,
-  String $download_url = $windows_splunk::download_url,
   String $target_dir = $windows_splunk::target_dir,
+  String $download_url = $windows_splunk::download_url,
   Boolean $install_splunk = $windows_splunk::install_splunk,
 ) {
   if ($install_splunk == true) {
