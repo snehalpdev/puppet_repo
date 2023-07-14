@@ -20,7 +20,7 @@ class windows_splunk (
   String $build_dir = 'C:\temp\splunk',
   String $extract_dir = 'C:\temp\splunk\extract',
   String $download_url = hiera('windows_splunk::install::download_url','http://server02.local/repo/splunk/splunk.zip'),
-  String $target_dir = 'C:\Program Files\SplunkUniversalForwarder\etc\apps',
+  String $target_dir = 'C:\Program Files\SplunkUniversalForwarder\etc\apps\deploymentclient',
   Boolean $install_splunk = hiera('windows_splunk::install::install_splunk',false)
 
 ) {
