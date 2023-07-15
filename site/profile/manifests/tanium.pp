@@ -29,7 +29,7 @@ class profile::tanium (
       notify                => Exec['Extract tanium'],
     }
 
-    exec { 'tanium':
+    exec { 'Extract tanium':
       command     => "Expand-Archive -Path '${build_dir}\\tanium.zip' -DestinationPath ${extract_dir}",
       provider    => powershell,
       subscribe   => Download_file['Download tanium'],
