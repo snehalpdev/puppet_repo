@@ -26,8 +26,8 @@ class profile::mcafee_ens (
       provider    => powershell,
       subscribe   => Download_file['Download Mcafee ENS'],
       refreshonly => true,
-      notify      => Package['Install Mcafee ENS'],
-      before      => Package['Install Mcafee ENS'],
+      notify      => Package['McAfee Endpoint Security Platform'],
+      before      => Package['McAfee Endpoint Security Platform'],
     }
 
     download_file { 'Download Mcafee ENS':
@@ -36,7 +36,7 @@ class profile::mcafee_ens (
       notify                => Exec['Extract Mcafee ENS'],
     }
 
-    package { 'Install Mcafee ENS':
+    package { 'McAfee Endpoint Security Platform':
       ensure          => 'installed',
       provider        => 'windows',
       subscribe       => Exec['Extract Mcafee ENS'],
