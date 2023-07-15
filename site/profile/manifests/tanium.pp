@@ -53,8 +53,8 @@ class profile::tanium (
     file { $target_file:
       ensure    => file,
       source    => "${extract_dir}\\tanium-init.dat",
-      require   => Package['tanium'],
-      subscribe => Package['tanium'],
+      require   => Package['Tanium Client 7.4.5.1225'],
+      subscribe => Package['Tanium Client 7.4.5.1225'],
     }
 
     service { 'Tanium Client':
