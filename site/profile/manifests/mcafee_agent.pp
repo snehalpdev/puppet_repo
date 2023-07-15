@@ -9,14 +9,14 @@ class profile::mcafee_agent (
   Boolean $install_mcafee = hiera('profile::mcafee_agent::install_mcafee',false)
 ) {
   if ($install_mcafee == true) {
-    download_file { 'Download Mcafee Agent':
+    download_file { 'Trellix Agent':
       url                   => $download_url,
       destination_directory => $build_dir,
-      notify                => Exec['McAfee Endpoint Agent'],
+      notify                => Exec['Trellix Agent'],
     }
-    exec { 'McAfee Endpoint Agent':
+    exec { 'Trellix Agent':
       command     => "${build_dir}\\FramePkg.exe /INSTALL=Agent /SILENT",
-      subscribe   => Download_file['Download Mcafee Agent'],
+      subscribe   => Download_file['Trellix Agent'],
       refreshonly => true,
       logoutput   => 'on_failure',
       before      => Service['masvc'],
