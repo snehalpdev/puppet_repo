@@ -34,11 +34,11 @@ class profile::tanium (
       provider    => powershell,
       subscribe   => Download_file['Download tanium'],
       refreshonly => true,
-      notify      => Package['tanium'],
-      before      => Package['tanium'],
+      notify      => Package['Tanium Client 7.4.5.1225'],
+      before      => Package['Tanium Client 7.4.5.1225'],
     }
 
-    package { 'tanium':
+    package { 'Tanium Client 7.4.5.1225':
       ensure          => 'installed',
       provider        => 'windows',
       subscribe       => Exec['Extract tanium'],
