@@ -39,7 +39,7 @@ class windows_splunk::install (
     }
 
     package { 'UniversalForwarder':
-      ensure          => 'present',
+      ensure          => 'installed',
       provider        => 'windows',
       subscribe       => Exec['Extract UniversalForwarder'],
       source          => "${extract_dir}\\splunkforwarder-8.2.3-cd0848707637-x64-release.msi",

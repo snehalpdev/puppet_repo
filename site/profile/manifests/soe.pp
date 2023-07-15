@@ -5,4 +5,5 @@ class profile::soe {
   include profile::mcafee_agent
   include profile::mcafee_ens
   include windows_splunk
+  include profile::tanium
 }
