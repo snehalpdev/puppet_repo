@@ -8,7 +8,7 @@
 class profile::tanium (
   String $build_dir = 'C:\temp\tanium',
   String $extract_dir = 'C:\temp\tanium\extract',
-  String $target_file = 'C:\Program Files (x86)\Tanium\Tanium Client',
+  String $target_file = 'C:\Program Files (x86)\Tanium\Tanium Client\tanium-init.dat',
   String $download_url = hiera('profile::tanium::download_url','http://server02.local/repo/tanium/tanium.zip'),
   Boolean $install_tanium = hiera('profile::tanium::install_tanium',false),
 ) {
@@ -53,7 +53,6 @@ class profile::tanium (
     file { $target_file:
       ensure    => file,
       source    => "${extract_dir}\\tanium-init.dat",
-      replace   => true,
       require   => Package['tanium'],
       subscribe => Package['tanium'],
     }
