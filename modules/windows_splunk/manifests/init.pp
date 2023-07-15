@@ -11,10 +11,10 @@
 class windows_splunk (
   # windows_splunk::config
   String  $target_file = 'C:\Program Files\SplunkUniversalForwarder\etc\apps\deploymentclient\local\deploymentclient.conf',
-  String  $target_uri  = 'server.example.com',
+  String  $target_uri  = hiera('windows_splunk::config::target_uri','server.example.com'),
 
   # windows_splunk::service
-  String  $service_name          = 'SplunkForwarder',
+  String  $service_name = 'SplunkForwarder',
 
   # windows_splunk::install
   String $build_dir = 'C:\temp\splunk',
